@@ -15,15 +15,13 @@ const port = process.env.PORT || 3000
 io.on('connection', (socket) => {
   console.log('new connection made')
 
-socket.emit('newMessage', {
-  from: 'ahmed@gmail.com',
-  text: 'hey, how  ru ',
-  createdAt: 123
-})
-
-socket.on('createMessage', (newMessage) => {
-  newMessage.createdAt = 234
-  console.log('New message', newMessage)
+socket.on('createMessage', (message) => {
+  console.log('New message', message)
+  io.emit('newMessage', {
+    from: message.from,
+    text: message.text,
+    createdAt: new Date().getTime()
+  })
 })
 
 socket.on('disconnect', () => {
