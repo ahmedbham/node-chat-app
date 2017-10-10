@@ -14,15 +14,31 @@ const port = process.env.PORT || 3000
 
 io.on('connection', (socket) => {
   console.log('new connection made')
-
-socket.on('createMessage', (message) => {
-  console.log('New message', message)
-  io.emit('newMessage', {
-    from: message.from,
-    text: message.text,
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'welcome to the chat app',
     createdAt: new Date().getTime()
   })
-})
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'new user joined',
+    createdAt: new Date().getTime()
+  })
+
+// socket.on('createMessage', (message) => {
+//   console.log('New message', message)
+//   io.emit('newMessage', {
+//     from: message.from,
+//     text: message.text,
+//     createdAt: new Date().getTime()
+//   })
+//
+//   socket.broadcast.emit('newMessage', {
+//     from: message.from,
+//     text: message.text,
+//     createdAt: new Date().getTime()
+//   })
+// })
 
 socket.on('disconnect', () => {
   console.log('client is disconnected')
