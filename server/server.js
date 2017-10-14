@@ -24,13 +24,13 @@ io.on('connection', (socket) => {
 
 socket.on('createMessage', (message, callback) => {
   console.log('New message', message)
-  callback('this is from server')
+  callback()
   io.emit('newMessage', generateMessage(message.from, message.text))
 })
 
 socket.on('createLocationMessage', (message, callback) => {
   console.log('New location', message)
-  callback('this is from server')
+  callback()
   io.emit('newLocationMessage', generateLocationMessage('Admin', message.latitude, message.longitude))
 })
 
