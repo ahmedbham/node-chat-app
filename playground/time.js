@@ -1,6 +1,6 @@
 var moment = require('moment')
 
-var sometime = moment().valueOf()
+var sometime = moment()
 console.log(sometime)
 
 var date = moment()
